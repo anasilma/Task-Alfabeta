@@ -10,21 +10,25 @@ import {
 import { styles } from "./styles";
 
 export default class LoginForm extends Component {
-  state = { email: "", password: "" };
+  state = { username: "", password: "" };
 
-  handleEmailChange = email => this.setState({ email });
+  handleUserChange = username => this.setState({ username });
 
   handlePasswordChange = password => this.setState({ password });
 
   handleButtonPress = () => {
-    const { navigate } = this.props.navigation;
-    // const { email, password } = this.state;
-    // this.props.onButtonPress(email, password);
-    navigate("Bot");
+    if(this.state.username === 'user' && this.state.password === '12345'){
+      const { navigate } = this.props.navigation;
+      return(
+        navigate("Bot")
+      )
+    } else{
+      alert('username = user, pass= 12345')
+    }
   };
 
   render() {
-    const { email, password } = this.state;
+    const { password } = this.state;
     const { textInput, button, buttonTitle } = styles;
     return (
       <KeyboardAvoidingView>
@@ -40,12 +44,11 @@ export default class LoginForm extends Component {
         <View>
           <TextInput
             style={textInput}
-            placeholder="Email"
+            placeholder="Email / Username"
             returnKeyType="next"
             keyboardType="email-address"
             autoCapitalize="none"
-            onChangeText={this.handleEmailChange}
-            value={email}
+            onChangeText={this.handleUserChange}
             underlineColorAndroid={"transparent"}
           />
 
